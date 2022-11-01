@@ -1,10 +1,37 @@
+import first_script
+import second_script
+import third_script
+import iterator
+
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QApplication, QMainWindow, QLabel
 
 import sys
 
 
+def click_button_first_star():
+    iterator(1)
+
+
+def click_button_second_star():
+    iterator(2)
+
+
+def click_button_third_star():
+    iterator(3)
+
+
+def click_button_fourth_star():
+    iterator(4)
+
+
+def click_button_fifth_star():
+    iterator(5)
+
+
 def application():
+    dirs = [[iterator(1)], [], [], [], []]
+    print(dirs)
     app = QApplication(sys.argv)
     window = QMainWindow()
 
@@ -37,29 +64,46 @@ def application():
     text_opinion.adjustSize()
 
     button_create_dataset = QtWidgets.QPushButton(window)
-    button_create_dataset.move(350, 0)
+    button_create_dataset.move(0, 30)
     button_create_dataset.setText("Создать dataset")
     button_create_dataset.setFixedWidth(200)
+    button_create_dataset.clicked.connect(first_script.first_script)
 
     button_recreate_dataset = QtWidgets.QPushButton(window)
-    button_recreate_dataset.move(350, 50)
+    button_recreate_dataset.move(0, 90)
     button_recreate_dataset.setText("Перекопировать dataset")
     button_recreate_dataset.setFixedWidth(200)
+    button_recreate_dataset.clicked.connect(second_script.second_script)
 
     button_copy_random_dataset = QtWidgets.QPushButton(window)
-    button_copy_random_dataset.move(350, 100)
+    button_copy_random_dataset.move(0, 150)
     button_copy_random_dataset.setText("Рандомный элемент dataset")
     button_copy_random_dataset.setFixedWidth(200)
+    button_copy_random_dataset.clicked.connect(third_script.third_script)
 
-    button_last_opinion = QtWidgets.QPushButton(window)
-    button_last_opinion.move(350, 200)
-    button_last_opinion.setText("Предыдущий отзыв")
-    button_last_opinion.setFixedWidth(200)
+    button_first_star = QtWidgets.QPushButton(window)
+    button_second_star = QtWidgets.QPushButton(window)
+    button_third_star = QtWidgets.QPushButton(window)
+    button_fourth_star = QtWidgets.QPushButton(window)
+    button_fifth_star = QtWidgets.QPushButton(window)
 
-    button_next_opinion = QtWidgets.QPushButton(window)
-    button_next_opinion.move(350, 200)
-    button_next_opinion.setText("Следующий отзыв")
-    button_next_opinion.setFixedWidth(200)
+    button_first_star.move(700, 30)
+    button_second_star.move(700, 60)
+    button_third_star.move(700, 90)
+    button_fourth_star.move(700, 120)
+    button_fifth_star.move(700, 150)
+
+    button_first_star.setText("1>>")
+    button_second_star.setText("2>>")
+    button_third_star.setText("3>>")
+    button_fourth_star.setText("4>>")
+    button_fifth_star.setText("5>>")
+
+    button_first_star.clicked.connect(click_button_first_star)
+    button_second_star.clicked.connect(click_button_second_star)
+    button_third_star.clicked.connect(click_button_third_star)
+    button_fourth_star.clicked.connect(click_button_fourth_star)
+    button_fifth_star.clicked.connect(click_button_fifth_star)
 
     window.show()
     sys.exit(app.exec_())
