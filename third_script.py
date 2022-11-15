@@ -3,7 +3,12 @@ import random
 import csv
 
 
-def third_script(path:str) ->str:
+import second_script
+
+
+def third_script(path: str) -> str:
+    if os.path.exists('second_dataset') == False:
+        second_script.second_script("")
     # redact file 1_0001.txt to random <10000 .txt
     names = [i for i in range(10000)]
     out_directory = os.path.dirname(__file__)
@@ -21,10 +26,9 @@ def third_script(path:str) ->str:
             directory = os.path.join(out_directory, "third_dataset", str(name)+".txt")
             file_writer.writerow([directory, os.path.join("second_dataset", element), element[0]])
 
-
 def script_3(name: str) -> None:
     """create a csv"""
     third_script(name)
 
-if __name__ == "__main__":
+if __name__=="__main__":
     script_3("rt")

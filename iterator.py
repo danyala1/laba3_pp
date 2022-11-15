@@ -1,26 +1,28 @@
 import os
+import re
+import csv
 from typing import Optional
 
-def iterator(name: str) -> Optional[str]:
-    """create a csv"""
-    names = os.listdir(os.path.join("dataset", name))
-    for i in range(len(names)):
-        yield os.path.join("dataset", name, names[i])  # делаем итератор
-    return None
-
-
-class Iterator_txt:
-    def __init__(self, name: str, directory: str):
-        self.directories = os.path.dirname(__file__)
-        self.limit = len(self.names)
+class Iterator:
+    def __init__(self, way_to_csv_file: str, name_class: str):
+        self.name_class = str(name_class)
+        self.list = []
+        self.way_to_file = way_to_csv_file
         self.counter = 0
 
-    def __next__(self):
-        if self.counter < self.limit:
-            self.counter += 1
-            return self.names[self.counter - 1]
-        else:
-            raise StopIteration
+        file = open(self.way_to_file, "r", encoding="utf-8")
+        reader = csv.reader(file, delimiter="\t")
+        for row in reader:
+            if str(row)[-3] == self.name_class:
+                self.list.append(row)
 
-for i in iterator("1"):
-    print(i)
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        if self.counter < len(self.list):
+            self.counter += 1
+            print(self.list[self.counter - 1])
+            return self.list[self.counter - 1]
+        else:
+            return ""
